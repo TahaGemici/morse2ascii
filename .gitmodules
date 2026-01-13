@@ -1,3 +1,3 @@
-[submodule "common"]
+[submodule "rtl/common"]
 	path = rtl/common
 	url = https://github.com/TahaGemici/verilog-modules
