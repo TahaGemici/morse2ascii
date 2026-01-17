@@ -2,6 +2,7 @@ module morse_tx #(parameter PRESCALER = 100000) (
     input clk,
     input arst_n,
 
+    input write_en,
     input[7:0] ascii_in,
     output full,
     
@@ -24,7 +25,7 @@ module morse_tx #(parameter PRESCALER = 100000) (
         .rData(fifo_out),
         .empty(empty),
         .wClk(clk),
-        .wEn(|ascii_in),
+        .wEn(write_en),
         .wData(ascii_in),
         .full(full)
     );
