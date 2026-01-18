@@ -1,1 +1,1 @@
-# morse2ascii
+# ascii2morse
