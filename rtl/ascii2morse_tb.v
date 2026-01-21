@@ -21,7 +21,7 @@ module ascii2morse_tb;
     // Clock generation - 100MHz (10ns period)
     initial begin
         clk = 0;
-        forever #5 clk = ~clk;
+        forever clk = #5 ~clk;
     end
 
     // Test stimulus
