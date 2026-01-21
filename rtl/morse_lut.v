@@ -1,4 +1,4 @@
-module ascii2morse_lut(
+module morse_lut(
     input[7:0] ascii,
     output reg[23:0] morse
 );

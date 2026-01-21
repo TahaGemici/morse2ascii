@@ -1,4 +1,4 @@
-module ascii2morse #(parameter PRESCALER = 100000) (
+module morse #(parameter PRESCALER = 100000) (
     input clk,
     input arst_n,
 
@@ -31,7 +31,7 @@ module ascii2morse #(parameter PRESCALER = 100000) (
     );
 
     wire[23:0] conv_out;
-    ascii2morse_lut ascii2morse_lut_inst (
+    morse_lut morse_lut_inst (
         .ascii(fifo_out),
         .morse(conv_out)
     );
