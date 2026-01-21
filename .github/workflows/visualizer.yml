@@ -1,0 +1,46 @@
+name: Generate Block Diagrams
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.v'
+      - '**.sv'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install Symbolator
+      run: |
+        pip install symbolator
+    
+    - name: Generate block diagrams
+      run: |
+        # Generate SVG for each Verilog module
+        symbolator -i src/my_module.v -o docs/my_module.svg
+        # Or generate for all .v files
+        find src -name "*.v" -exec symbolator -i {} -o docs/{}.svg \;
+    
+    - name: Commit diagrams
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add docs/*.svg
+        git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate block diagrams"
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
