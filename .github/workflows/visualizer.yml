@@ -19,11 +19,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
-    
+        python-version: '3.9'
+
     - name: Install Symbolator
       run: |
-        pip install git+https://github.com/kevinpt/symbolator.git
+        pip install setuptools==57.5.0
+        pip install symbolator
     
     - name: Generate block diagrams
       run: |
